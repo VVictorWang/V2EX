@@ -1,0 +1,285 @@
+package com.example.victor.v2ex.Reply;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.victor.v2ex.HttpDownLoad;
+import com.example.victor.v2ex.Node.NodeActivity;
+import com.example.victor.v2ex.R;
+import com.example.victor.v2ex.ScrollClass;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ContentActivity extends AppCompatActivity {
+    private TextView textView;
+    private ProgressDialog dialog;
+    private String url, el_name, theme_na, topic;
+    private TextView theme_name, host_name, post_information, content_main;
+    private ImageView host_iamge;
+    private Bitmap bitmap;
+    private String[] information;
+    private String content = new String();
+    private List<String> replies = new ArrayList<>();
+    private List<ReplyMember> members = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+    private ReplyAdpter replyAdpter;
+    private int length, current;
+    private Elements element2;
+    private Document document;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            if (msg.what == 0x123) {
+                replyAdpter.notifyDataSetChanged();
+            } else if (msg.what == 0x124) {
+                replyAdpter.showLoadMore();
+            } else if (msg.what == 0x125) {
+                replyAdpter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+            return true;
+        }
+
+    });
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_content);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.content_toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.hideOverflowMenu();
+        textView = (TextView) findViewById(R.id.content_title);
+        theme_name = (TextView) findViewById(R.id.theme_name);
+        content_main = (TextView) findViewById(R.id.content_main);
+        host_iamge = (ImageView) findViewById(R.id.host_image);
+        host_name = (TextView) findViewById(R.id.host_name);
+        post_information = (TextView) findViewById(R.id.post_information);
+        recyclerView = (RecyclerView) findViewById(R.id.reply_list);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_content);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        dialog = new ProgressDialog(this);
+        dialog.setTitle("提示");
+        dialog.setMessage("正在加载中");
+        getSupportActionBar().setTitle("主题信息");
+        Intent intent = getIntent();
+        url = intent.getStringExtra("link");
+        new LoadTask().execute(url);
+        theme_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent5 = new Intent(ContentActivity.this, NodeActivity.class);
+                intent5.putExtra("linkname", topic);
+                startActivity(intent5);
+
+            }
+        });
+        recyclerView.addOnScrollListener(new ScrollClass(layoutManager) {
+            @Override
+            public void onLoad(int currentpage) {
+                replyAdpter.showLoading();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        int m = current;
+                        if (m >= 10 && m < length) {
+                            for (; m < (20 + current) && m < length; m++) {
+                                Element element1 = element2.get(m);
+                                String time = element1.select("span[class~=fade]").text();
+                                String name = element1.select("a[href~=/member/]").text();
+                                String reply = element1.select("div.reply_content").text();
+                                String url = element1.select("img").toString();
+                                String src = subImageurl(url);
+                                if (time.contains("via")) {
+                                    int k = time.indexOf("via");
+                                    time = time.substring(0, k);
+                                }
+                                Bitmap bitmap = HttpDownLoad.getBitmap("http://" + src);
+                                ReplyMember replyMember = new ReplyMember();
+                                replyMember.setBitmap(bitmap);
+                                replyMember.setName(name);
+                                replyMember.setReply(reply);
+                                replyMember.setTime(time);
+                                members.add(replyMember);
+                            }
+                            current = m;
+
+                            handler.sendEmptyMessage(0x123);
+                        } else {
+                            handler.sendEmptyMessage(0x124);
+                        }
+                    }
+                }).start();
+            }
+        });
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Elements elements4 = document.select("div[id~=^[a-z]][class=cell]");
+                        for (Element element5 : elements4) {
+                            if (element5.equals(element2.first())) {
+                                break;
+                            } else {
+                                String time = element5.select("span[class~=fade]").text();
+                                String name = element5.select("a[href~=/member/]").text();
+                                String reply = element5.select("div.reply_content").text();
+                                String url = element5.select("img").toString();
+                                String src = subImageurl(url);
+                                if (time.contains("via")) {
+                                    int k = time.indexOf("via");
+                                    time = time.substring(0, k);
+                                }
+                                Bitmap bitmap = HttpDownLoad.getBitmap("http://" + src);
+                                ReplyMember replyMember = new ReplyMember();
+                                replyMember.setBitmap(bitmap);
+                                replyMember.setName(name);
+                                replyMember.setReply(reply);
+                                replyMember.setTime(time);
+                                members.add(0, replyMember);
+                            }
+                        }
+                        handler.sendEmptyMessage(0x125);
+                    }
+                }).start();
+            }
+        });
+
+    }
+
+    class LoadTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String title = new String();
+            try {
+                document = Jsoup.connect(url).get();
+                title = document.title();
+                Element elements = document.select("small[class=gray]").first();
+                el_name = elements.text();
+                information = el_name.split("·");
+                Element element3 = document.select("div[class=box][style~=border]").first();
+                String host_photo = subImageurl(element3.select("img").toString());
+                bitmap = HttpDownLoad.getBitmap("http://" + host_photo);
+                topic = element3.select("a[href~=/go/]").toString();
+                int i = topic.indexOf("/go/");
+                int j = topic.indexOf("\">");
+                topic = topic.substring(i, j);
+                Log.e("fre", topic);
+                theme_na = element3.select("a[href~=/go/]").text();
+                if (title.contains("V2EX")) {
+                    int index = title.indexOf('V');
+                    title = title.substring(0, index - 2);
+                }
+                element2 = document.select("div[id~=^[a-z]][class=cell]");
+                length = element2.size();
+                int m = 0;
+                for (; m < 20 && m < length; m++) {
+                    Element element1 = element2.get(m);
+                    String time = element1.select("span[class~=fade]").text();
+                    String name = element1.select("a[href~=/member/]").text();
+                    String reply = element1.select("div.reply_content").text();
+                    String url = element1.select("img").toString();
+                    String src = subImageurl(url);
+                    if (time.contains("via")) {
+                        int k = time.indexOf("via");
+                        time = time.substring(0, k);
+                    }
+
+                    Bitmap bitmap = HttpDownLoad.getBitmap("http://" + src);
+                    ReplyMember replyMember = new ReplyMember();
+                    replyMember.setBitmap(bitmap);
+                    replyMember.setName(name);
+                    replyMember.setReply(reply);
+                    replyMember.setTime(time);
+                    members.add(replyMember);
+//                    Log.e("xsx",src);
+                }
+                current = m;
+                Element element = document.select("div.topic_content").first();
+                content = element.text();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return title;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (s != null && content != null) {
+                textView.setText(s);
+                content_main.setText(content);
+
+
+                host_name.setText("By " + information[0]);
+                StringBuilder builder = new StringBuilder();
+                for (int i = 1; i < information.length; i++) {
+                    builder.append(information[i] + "  ");
+                }
+                post_information.setText(builder.toString());
+                theme_name.setText("V2EX > " + theme_na);
+                host_iamge.setImageBitmap(bitmap);
+                replyAdpter = new ReplyAdpter(ContentActivity.this, members, recyclerView);
+                recyclerView.setAdapter(replyAdpter);
+
+            }
+            dialog.dismiss();
+        }
+    }
+
+//    private void sendRe(final String url) {
+//        new Thread(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                Document document = null;
+//                try {
+//                    document = Jsoup.connect(url).get();
+//                    String title =document.select("title").toString();
+//                    Log.e("de", "ddwdw" + title);
+////            textView.setText(title);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+//    }
+
+    private String subImageurl(String raw) {
+        int i = raw.indexOf("\" class");
+        int j = raw.indexOf("v2ex");
+        return raw.substring(j, i);
+    }
+}

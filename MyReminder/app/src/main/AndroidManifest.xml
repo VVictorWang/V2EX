@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.victor.myreminder">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity"
+            android:label="MyReminder">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Create"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".Chart.pieChart"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Chart.BarChart"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".Game.Alarm"></activity>
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true" />
+        <receiver android:name=".MainActivity$DeleteReciever"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="REFRESH"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".AlarmService"
+            android:enabled="true" />
+    </application>
+
+</manifest>

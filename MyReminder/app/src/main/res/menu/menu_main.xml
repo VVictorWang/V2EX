@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search_go_btn"
+        android:title="排序"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/menu_main_time"
+                android:title="按修改时间排序"
+                 />
+            <item
+                android:id="@+id/menu_main_priority"
+                android:title="按重要程度排序"
+               />
+            <item
+                android:id="@+id/menu_main_before"
+                android:title="按截止时间排序"/>
+        </menu>
+    </item>
+<item
+    android:id="@+id/generate_charts"
+    android:title="图形分析"
+    app:showAsAction="always">
+    <menu>
+        <item
+        android:title="按完成情况生成饼状图"
+        android:id="@+id/chartto"
+        />
+
+        <item
+            android:id="@+id/chartto_priority"
+            android:title="按重要程度生成线状图"/>
+    </menu>
+</item>
+</menu>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.victor.v2ex.Node.NodeActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/node_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#6f8cfa"
+        app:popupTheme="@style/ThemeOverlay.AppCompat" />
+
+    <RelativeLayout
+        android:id="@+id/help_node_infor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f2f0f0"
+        android:layout_below="@+id/node_toolbar">
+
+        <RelativeLayout
+            android:id="@+id/main_lay_node"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/node_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp" />
+
+            <TextView
+                android:id="@+id/node_title_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/node_image"
+                android:paddingLeft="30dp"
+                android:paddingTop="10dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/node_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/node_title_show"
+                android:layout_toRightOf="@+id/node_image"
+                android:paddingLeft="10dp"
+
+
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main_lay_node">
+
+            <TextView
+                android:id="@+id/theme_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingRight="10dp"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/content_node"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/help_node_infor"
+        android:paddingTop="10dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>
