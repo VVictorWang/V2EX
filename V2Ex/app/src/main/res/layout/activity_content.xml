@@ -18,92 +18,14 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat" />
 
 
-    <RelativeLayout
-        android:id="@+id/content_lay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/content_toolbar">
-
-        <TextView
-            android:id="@+id/theme_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="7dp"
-            android:paddingTop="6dp"
-            android:textColor="#b8b9b6"
-            android:textSize="12sp" />
-
-        <ImageView
-            android:id="@+id/host_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:paddingRight="7dp"
-            android:paddingTop="6dp" />
-
-        <TextView
-            android:id="@+id/content_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/theme_name"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <RelativeLayout
-            android:id="@+id/information_con"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/content_title"
-            android:paddingLeft="10dp">
-
-            <TextView
-                android:id="@+id/host_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="20dp"
-                android:textColor="#b8b9b6"
-
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/post_information"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/host_name"
-                android:paddingLeft="10dp"
-                android:paddingTop="20dp"
-                android:textColor="#b8b9b6"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/fen_ge_xian"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/information_con"
-            android:paddingTop="8dp"
-            android:background="#c5c6c3" />
-
-        <TextView
-            android:id="@+id/content_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fen_ge_xian"
-            android:paddingLeft="20dp"
-            android:paddingTop="12dp"
-            android:textColor="#121212"
-            android:textSize="14sp" />
-
-    </RelativeLayout>
 
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/content_lay"
-        android:paddingTop="10dp">
+        android:layout_below="@+id/content_toolbar">
+        <!--android:layout_below="@+id/content_lay"-->
+        <!--android:paddingTop="10dp">-->
         <!---->
         <!---->
         <android.support.v4.widget.SwipeRefreshLayout

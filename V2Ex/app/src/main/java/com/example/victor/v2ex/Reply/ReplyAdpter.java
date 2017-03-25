@@ -1,6 +1,7 @@
 package com.example.victor.v2ex.Reply;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.victor.v2ex.ContentMainHolder;
+import com.example.victor.v2ex.Node.NodeActivity;
 import com.example.victor.v2ex.R;
 
 import java.util.ArrayList;
@@ -23,15 +26,31 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ReplyAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_CONTENT = 0;
     private static final int TYPE_FOOTER = 1;
+    private static final int TYPE_FIRST = 2;
     private Context context;
     private ProgressBar pbLoading;
     private TextView tvLoadMore;
-//    private List<String> replies = new ArrayList<>();
-//    private List<String> members = new ArrayList<>();
-//    private List<String> times = new ArrayList<>();
-//    private List<Bitmap> bitmaps = new ArrayList<>();
+    private ContentMainHolder mainHolder = new ContentMainHolder();
+    private View.OnClickListener mclicklistenner = new myclicklistenner();
     private List<ReplyMember> members = new ArrayList<>();
     private RecyclerView recyclerView;
+
+    public static class FirstViewHolder extends RecyclerView.ViewHolder {
+        private TextView textView;
+        private TextView theme_name, host_name, post_information, content_main;
+        private ImageView host_iamge;
+
+        public FirstViewHolder(View itemView) {
+            super(itemView);
+            textView = (TextView) itemView.findViewById(R.id.content_title);
+            theme_name = (TextView)itemView. findViewById(R.id.theme_name);
+            content_main = (TextView) itemView.findViewById(R.id.content_main);
+            host_iamge = (ImageView) itemView.findViewById(R.id.host_image);
+            host_name = (TextView) itemView.findViewById(R.id.host_name);
+            post_information = (TextView) itemView.findViewById(R.id.post_information);
+
+        }
+    }
     public static class ContentViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;
         private TextView member;
@@ -59,10 +78,11 @@ public class ReplyAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public ReplyAdpter(Context context,List<ReplyMember> members, RecyclerView recyclerView) {
+    public ReplyAdpter(Context context,List<ReplyMember> members, ContentMainHolder mainHolder,RecyclerView recyclerView) {
         this.context = context;
         this.members = members;
         this.recyclerView = recyclerView;
+        this.mainHolder = mainHolder;
     }
 
     @Override
@@ -73,13 +93,12 @@ public class ReplyAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return new ContentViewHolder(layoutInflater.inflate(R.layout.replie_list, parent, false));
         } else if (viewType == TYPE_FOOTER) {
             return new FooterViewHolder(layoutInflater.inflate(R.layout.list_footer, parent, false));
+        } else if (viewType == TYPE_FIRST) {
+            return new FirstViewHolder(layoutInflater.inflate(R.layout.content_main, parent, false));
         }
         return null;
     }
 
-    public void remove(int i) {
-        notifyItemRemoved(i);
-    }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
@@ -91,11 +110,24 @@ public class ReplyAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ((ContentViewHolder)holder).member.setText(member.getName());
                 ((ContentViewHolder)holder).time.setText(member.getTime());
                 ((ContentViewHolder)holder).member_image.setImageBitmap(member.getBitmap());
-                ((ContentViewHolder)holder).number.setText("第" + (position+1) + "楼");
+                ((ContentViewHolder)holder).number.setText("第" + position + "楼");
             }
         } else if (type == TYPE_FOOTER) {
             pbLoading = ((FooterViewHolder) holder).pbLoading;
             tvLoadMore = ((FooterViewHolder) holder).tvLoadMore;
+        } else if (type == TYPE_FIRST) {
+            ((FirstViewHolder) holder).textView.setText(mainHolder.getTitle());
+            ((FirstViewHolder) holder).host_iamge.setImageBitmap(mainHolder.getBitmap());
+            ((FirstViewHolder) holder).content_main.setText(mainHolder.getContent());
+            ((FirstViewHolder)holder).theme_name.setText(mainHolder.getTheme_na());
+            ((FirstViewHolder)holder).theme_name.setOnClickListener(mclicklistenner);
+            String[] temp = mainHolder.getInformation();
+            ((FirstViewHolder) holder).host_name.setText(temp[0]);
+            StringBuilder builder = new StringBuilder();
+            for (int i=1;i<temp.length;i++) {
+                builder.append(temp[i] + "  ");
+            }
+            ((FirstViewHolder) holder).post_information.setText(builder.toString());
         }
     }
 
@@ -108,6 +140,9 @@ public class ReplyAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemViewType(int position) {
         if (position + 1 == getItemCount()) {
             return TYPE_FOOTER;
+        } else if (position == 0) {
+
+            return TYPE_FIRST;
         } else {
             return TYPE_CONTENT;
         }
@@ -126,6 +161,15 @@ public class ReplyAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (pbLoading != null && tvLoadMore != null) {
             pbLoading.setVisibility(View.GONE);
             tvLoadMore.setVisibility(View.VISIBLE);
+        }
+    }
+
+    class myclicklistenner implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Intent intent5 = new Intent(context, NodeActivity.class);
+            intent5.putExtra("linkname", mainHolder.getTopic());
+            context.startActivity(intent5);
         }
     }
 }

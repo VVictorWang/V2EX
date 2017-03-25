@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.victor.v2ex.ContentMainHolder;
 import com.example.victor.v2ex.HttpDownLoad;
 import com.example.victor.v2ex.Node.NodeActivity;
 import com.example.victor.v2ex.R;
@@ -31,15 +32,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContentActivity extends AppCompatActivity {
-    private TextView textView;
     private ProgressDialog dialog;
     private String url, el_name, theme_na, topic;
-    private TextView theme_name, host_name, post_information, content_main;
-    private ImageView host_iamge;
     private Bitmap bitmap;
     private String[] information;
     private String content = new String();
-    private List<String> replies = new ArrayList<>();
     private List<ReplyMember> members = new ArrayList<>();
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
@@ -48,6 +45,7 @@ public class ContentActivity extends AppCompatActivity {
     private Elements element2;
     private Document document;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ContentMainHolder mainHolder;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -71,12 +69,7 @@ public class ContentActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.content_toolbar);
         setSupportActionBar(toolbar);
         toolbar.hideOverflowMenu();
-        textView = (TextView) findViewById(R.id.content_title);
-        theme_name = (TextView) findViewById(R.id.theme_name);
-        content_main = (TextView) findViewById(R.id.content_main);
-        host_iamge = (ImageView) findViewById(R.id.host_image);
-        host_name = (TextView) findViewById(R.id.host_name);
-        post_information = (TextView) findViewById(R.id.post_information);
+        mainHolder = new ContentMainHolder();
         recyclerView = (RecyclerView) findViewById(R.id.reply_list);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_content);
         layoutManager = new LinearLayoutManager(this);
@@ -88,15 +81,6 @@ public class ContentActivity extends AppCompatActivity {
         Intent intent = getIntent();
         url = intent.getStringExtra("link");
         new LoadTask().execute(url);
-        theme_name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent5 = new Intent(ContentActivity.this, NodeActivity.class);
-                intent5.putExtra("linkname", topic);
-                startActivity(intent5);
-
-            }
-        });
         recyclerView.addOnScrollListener(new ScrollClass(layoutManager) {
             @Override
             public void onLoad(int currentpage) {
@@ -196,7 +180,6 @@ public class ContentActivity extends AppCompatActivity {
                 int i = topic.indexOf("/go/");
                 int j = topic.indexOf("\">");
                 topic = topic.substring(i, j);
-                Log.e("fre", topic);
                 theme_na = element3.select("a[href~=/go/]").text();
                 if (title.contains("V2EX")) {
                     int index = title.indexOf('V');
@@ -216,7 +199,6 @@ public class ContentActivity extends AppCompatActivity {
                         int k = time.indexOf("via");
                         time = time.substring(0, k);
                     }
-
                     Bitmap bitmap = HttpDownLoad.getBitmap("http://" + src);
                     ReplyMember replyMember = new ReplyMember();
                     replyMember.setBitmap(bitmap);
@@ -224,9 +206,13 @@ public class ContentActivity extends AppCompatActivity {
                     replyMember.setReply(reply);
                     replyMember.setTime(time);
                     members.add(replyMember);
-//                    Log.e("xsx",src);
                 }
                 current = m;
+                mainHolder.setTitle(title);
+                mainHolder.setTopic(topic);
+                mainHolder.setInformation(information);
+                mainHolder.setBitmap(bitmap);
+                mainHolder.setTheme_na("V2EX > " + theme_na);
                 Element element = document.select("div.topic_content").first();
                 content = element.text();
             } catch (Exception e) {
@@ -239,44 +225,14 @@ public class ContentActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (s != null && content != null) {
-                textView.setText(s);
-                content_main.setText(content);
-
-
-                host_name.setText("By " + information[0]);
-                StringBuilder builder = new StringBuilder();
-                for (int i = 1; i < information.length; i++) {
-                    builder.append(information[i] + "  ");
-                }
-                post_information.setText(builder.toString());
-                theme_name.setText("V2EX > " + theme_na);
-                host_iamge.setImageBitmap(bitmap);
-                replyAdpter = new ReplyAdpter(ContentActivity.this, members, recyclerView);
+                mainHolder.setContent(content);
+                replyAdpter = new ReplyAdpter(ContentActivity.this, members,mainHolder, recyclerView);
                 recyclerView.setAdapter(replyAdpter);
 
             }
             dialog.dismiss();
         }
     }
-
-//    private void sendRe(final String url) {
-//        new Thread(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                Document document = null;
-//                try {
-//                    document = Jsoup.connect(url).get();
-//                    String title =document.select("title").toString();
-//                    Log.e("de", "ddwdw" + title);
-////            textView.setText(title);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
-//    }
-
     private String subImageurl(String raw) {
         int i = raw.indexOf("\" class");
         int j = raw.indexOf("v2ex");

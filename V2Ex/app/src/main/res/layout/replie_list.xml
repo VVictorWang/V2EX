@@ -64,6 +64,7 @@
                 android:layout_below="@+id/mem_time"
                 android:textColor="#121212"
                 android:paddingTop="7dp"
+                android:textSize="14sp"
                 android:paddingLeft="25dp" />
 
         </RelativeLayout>

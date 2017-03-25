@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/help_node_infor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f2f0f0"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/main_lay_node"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/node_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp" />
+
+        <TextView
+            android:id="@+id/node_title_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/node_image"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/node_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/node_title_show"
+            android:layout_toRightOf="@+id/node_image"
+            android:paddingLeft="10dp"
+
+
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_lay_node">
+
+        <TextView
+            android:id="@+id/theme_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="10dp"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

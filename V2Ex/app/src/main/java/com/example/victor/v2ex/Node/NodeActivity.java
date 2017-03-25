@@ -34,13 +34,14 @@ public class NodeActivity extends AppCompatActivity {
     private String topicurl;
     private ProgressDialog dialog;
     private Bitmap bitmap;
-    private TextView node_title,node_description,theme_number;
-    private String theme_num,node_ti,node_des;
-    private CircleImageView node_image;
+//    private TextView node_title,node_description,theme_number;
+    private String node_ti;
+//    private CircleImageView node_image;
     private RecyclerView recyclerView;
-    private ViewAdapter viewAdapter;
+    private NodeAdapter viewAdapter;
     private List<Theme> themes = new ArrayList<>();
     private List<Bitmap> bitmaps = new ArrayList<>();
+    private NodeContenet nodeContenet = new NodeContenet();
     private String[] information ;
 
     @Override
@@ -49,10 +50,10 @@ public class NodeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_node);
         Toolbar toolbar = (Toolbar) findViewById(R.id.node_toolbar);
         setSupportActionBar(toolbar);
-        node_title = (TextView) findViewById(R.id.node_title_show);
-        node_image = (CircleImageView) findViewById(R.id.node_image);
-        node_description = (TextView) findViewById(R.id.node_description);
-        theme_number = (TextView) findViewById(R.id.theme_number);
+//        node_title = (TextView) findViewById(R.id.node_title_show);
+//        node_image = (CircleImageView) findViewById(R.id.node_image);
+//        node_description = (TextView) findViewById(R.id.node_description);
+//        theme_number = (TextView) findViewById(R.id.theme_number);
         recyclerView = (RecyclerView) findViewById(R.id.content_node);
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -82,9 +83,10 @@ public class NodeActivity extends AppCompatActivity {
                 String bimapString = element.select("img").toString();
                 bimapString = subImageurl(bimapString);
                 bitmap = HttpDownLoad.getBitmap("http://" + bimapString);
-                theme_num = element.select("span[class=snow]").text() + " " + element.select("strong[class=gray]").text();
+                nodeContenet.setTheme_num(element.select("span[class=snow]").text() + " " + element.select("strong[class=gray]").text());
                 node_ti = document.title();
-                node_des = element.select("span[class~=f12]").text();
+                nodeContenet.setNode_ti(node_ti);
+                nodeContenet.setNode_des(element.select("span[class~=f12]").text());
                 Elements elements = document.select("div[class~=cell from]");
                 for (Element element1 : elements) {
                     Theme theme = new Theme();
@@ -125,12 +127,9 @@ public class NodeActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (s != null) {
-                node_title.setText(node_ti);
-                node_description.setText(node_des);
-                theme_number.setText(theme_num);
-                node_image.setImageBitmap(bitmap);
+                nodeContenet.setBitmap(bitmap);
                 getSupportActionBar().setTitle(node_ti);
-                viewAdapter = new ViewAdapter(NodeActivity.this, recyclerView,themes, bitmaps);
+                viewAdapter = new NodeAdapter(NodeActivity.this,themes, bitmaps,recyclerView,nodeContenet);
                 recyclerView.setAdapter(viewAdapter);
                 viewAdapter.notifyDataSetChanged();
             }
