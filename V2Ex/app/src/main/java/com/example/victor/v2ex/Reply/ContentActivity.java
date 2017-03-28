@@ -12,14 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.victor.v2ex.ContentMainHolder;
 import com.example.victor.v2ex.HttpDownLoad;
-import com.example.victor.v2ex.Node.NodeActivity;
 import com.example.victor.v2ex.R;
 import com.example.victor.v2ex.ScrollClass;
 

@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.victor.v2ex.ContentMainHolder;
 import com.example.victor.v2ex.Node.NodeActivity;
 import com.example.victor.v2ex.R;
 
@@ -141,7 +140,6 @@ public class ReplyAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (position + 1 == getItemCount()) {
             return TYPE_FOOTER;
         } else if (position == 0) {
-
             return TYPE_FIRST;
         } else {
             return TYPE_CONTENT;

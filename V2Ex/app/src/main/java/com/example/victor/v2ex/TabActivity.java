@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 
+import com.example.victor.v2ex.Node.AllNodeActivity;
+import com.example.victor.v2ex.Themes.HotActivity;
+import com.example.victor.v2ex.Themes.Neweset;
+
 public class TabActivity extends android.app.TabActivity {
     private TabHost host;
 
@@ -27,5 +31,11 @@ public class TabActivity extends android.app.TabActivity {
         tabSpec1.setIndicator("最新主题");
         tabSpec1.setContent(intent2);
         host.addTab(tabSpec1);
+        Intent intent3 = new Intent();
+        intent3.setClass(this, AllNodeActivity.class);
+        TabHost.TabSpec tabSpec2 = host.newTabSpec("act3");
+        tabSpec2.setIndicator("所有节点");
+        tabSpec2.setContent(intent3);
+        host.addTab(tabSpec2);
     }
 }
