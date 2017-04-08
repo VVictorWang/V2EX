@@ -149,7 +149,7 @@ public class NodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         public void onClick(View v) {
             int postion = mRecyclerview.getChildAdapterPosition(v);
-            Theme theme = themes.get(postion);
+            Theme theme = themes.get(postion-1);
             String link = theme.getUrl();
             Intent intent = new Intent(context, ContentActivity.class);
             intent.putExtra("link", link);

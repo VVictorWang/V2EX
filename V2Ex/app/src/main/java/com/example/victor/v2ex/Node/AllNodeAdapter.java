@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.StringBuilderPrinter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,11 +55,25 @@ public class AllNodeAdapter extends RecyclerView.Adapter<AllNodeAdapter.ViewHold
         holder.node_topics.setText("主题总数：" + nodeInfo.getTopics());
         holder.node_title.setText(nodeInfo.getTitle());
         String header = nodeInfo.getHeader();
+        StringBuilder builder = new StringBuilder();
+        if (header != null) {
+            char[] head = header.toCharArray();
+            for (int i=0;i<head.length;i++) {
+                if (head[i] == '<') {
+                    do {
+                        i++;
+                    } while (head[i] != '>');
+                }
+                else
+                    builder.append(head[i]);
+            }
+        }
+
         if (header == null) {
             holder.node_header.setText("暂无描述");
         } else {
 
-            holder.node_header.setText(header);
+            holder.node_header.setText(builder.toString());
         }
     }
 

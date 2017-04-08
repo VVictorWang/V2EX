@@ -2,17 +2,41 @@ package com.example.victor.v2ex.Reply;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
+
 /**
  * Created by Victor on 2017/3/22.
  */
 
-public class ReplyMember {
+public class ReplyMember implements Serializable{
     private String reply;
     private String name;
     private String time;
     private Bitmap bitmap;
+    private Bitmap replyBitmap;
+    private boolean hasbitmap;
+
+    public void setHasbitmap(boolean hasbitmap) {
+        this.hasbitmap = hasbitmap;
+    }
+
+    public boolean isHasbitmap() {
+
+        return hasbitmap;
+    }
+
+    public void setReplyBitmap(Bitmap replyBitmap) {
+        this.replyBitmap = replyBitmap;
+    }
+
+    public Bitmap getReplyBitmap() {
+
+        return replyBitmap;
+    }
 
     public ReplyMember() {
+        hasbitmap = false;
+        replyBitmap = null;
     }
 
     public String getReply() {

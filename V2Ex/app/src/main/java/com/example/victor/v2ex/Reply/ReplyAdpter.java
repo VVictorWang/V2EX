@@ -3,6 +3,7 @@ package com.example.victor.v2ex.Reply;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.victor.v2ex.Image.BigPhoto;
+import com.example.victor.v2ex.Member.MemberActivity;
 import com.example.victor.v2ex.Node.NodeActivity;
 import com.example.victor.v2ex.R;
 
@@ -56,6 +59,7 @@ public class ReplyAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private TextView time;
         private CircleImageView member_image;
         private TextView number;
+        private ImageView imageView;
 
 
         public ContentViewHolder(View itemView) {
@@ -65,6 +69,7 @@ public class ReplyAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             this.time = (TextView) itemView.findViewById(R.id.time_created);
             this.member_image = (CircleImageView) itemView.findViewById(R.id.member_image);
             this.number = (TextView) itemView.findViewById(R.id.number);
+            this.imageView = (ImageView) itemView.findViewById(R.id.replyimage);
         }
     }
     public static class FooterViewHolder extends RecyclerView.ViewHolder {
@@ -100,16 +105,36 @@ public class ReplyAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         int type = getItemViewType(position);
         if (type == TYPE_CONTENT) {
             if (!members.isEmpty()) {
-                ReplyMember member = members.get(position);
+                final ReplyMember member = members.get(position-1);
                 ((ContentViewHolder)holder).textView.setText(member.getReply());
                 ((ContentViewHolder)holder).member.setText(member.getName());
+                ((ContentViewHolder)holder).member.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent8 = new Intent(context, MemberActivity.class);
+                        intent8.putExtra("member", member.getName());
+                        context.startActivity(intent8);
+                    }
+                });
                 ((ContentViewHolder)holder).time.setText(member.getTime());
                 ((ContentViewHolder)holder).member_image.setImageBitmap(member.getBitmap());
                 ((ContentViewHolder)holder).number.setText("第" + position + "楼");
+                if (member.isHasbitmap()) {
+                    ((ContentViewHolder)holder).imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent4 = new Intent(context, BigPhoto.class);
+                            intent4.putExtra("bitmap", member.getReplyBitmap());
+                            context.startActivity(intent4);
+                        }
+                    });
+                    ((ContentViewHolder) holder).imageView.setVisibility(View.VISIBLE);
+                    ((ContentViewHolder) holder).imageView.setImageBitmap(member.getReplyBitmap());
+                }
             }
         } else if (type == TYPE_FOOTER) {
             pbLoading = ((FooterViewHolder) holder).pbLoading;
@@ -122,6 +147,7 @@ public class ReplyAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((FirstViewHolder)holder).theme_name.setOnClickListener(mclicklistenner);
             String[] temp = mainHolder.getInformation();
             ((FirstViewHolder) holder).host_name.setText(temp[0]);
+            ((FirstViewHolder) holder).host_name.setOnClickListener(new MemberAct());
             StringBuilder builder = new StringBuilder();
             for (int i=1;i<temp.length;i++) {
                 builder.append(temp[i] + "  ");
@@ -168,6 +194,17 @@ public class ReplyAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             Intent intent5 = new Intent(context, NodeActivity.class);
             intent5.putExtra("linkname", mainHolder.getTopic());
             context.startActivity(intent5);
+        }
+    }
+
+    class MemberAct implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent6 = new Intent(context, MemberActivity.class);
+            String name = mainHolder.getInformation()[0];
+            intent6.putExtra("member", name);
+            Log.e("holder", name);
+            context.startActivity(intent6);
         }
     }
 }

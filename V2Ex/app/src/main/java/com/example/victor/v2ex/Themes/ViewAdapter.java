@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.example.victor.v2ex.Containers.Member;
 import com.example.victor.v2ex.Containers.Node;
 import com.example.victor.v2ex.Containers.Theme;
+import com.example.victor.v2ex.Member.MemberActivity;
+import com.example.victor.v2ex.Node.NodeActivity;
 import com.example.victor.v2ex.R;
 import com.example.victor.v2ex.Reply.ContentActivity;
 
@@ -76,12 +78,28 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (!themes.isEmpty()) {
             Theme theme = themes.get(position);
-            Node node = theme.getNode();
-            Member member = theme.getMember();
-            Bitmap bitmap = bitmaps.get(position);
+            final Node node = theme.getNode();
+            final Member member = theme.getMember();
+            final Bitmap bitmap = bitmaps.get(position);
             holder.imageView.setImageBitmap(bitmap);
             holder.node_title.setText(node.getTitle());
+            holder.node_title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, NodeActivity.class);
+                    intent.putExtra("linkname", node.getUrl());
+                    context.startActivity(intent);
+                }
+            });
             holder.username.setText(member.getUsername());
+            holder.username.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, MemberActivity.class);
+                    intent.putExtra("member", member.getUsername());
+                    context.startActivity(intent);
+                }
+            });
 //            Log.e("dsef", member.getAvatar_normal());
 //            Log.e("this", member.getId()+"  "+member.getUsername());
 //            holder.imageView.setImageBitmap(member.getAvatar_normal());

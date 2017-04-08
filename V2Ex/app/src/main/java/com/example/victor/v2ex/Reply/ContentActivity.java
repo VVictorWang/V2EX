@@ -13,7 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.example.victor.v2ex.HttpDownLoad;
+import com.example.victor.v2ex.Image.HttpDownLoad;
 import com.example.victor.v2ex.R;
 import com.example.victor.v2ex.ScrollClass;
 
@@ -85,10 +85,21 @@ public class ContentActivity extends AppCompatActivity {
                         int m = current;
                         if (m >= 10 && m < length) {
                             for (; m < (20 + current) && m < length; m++) {
+                                ReplyMember replyMember = new ReplyMember();
                                 Element element1 = element2.get(m);
                                 String time = element1.select("span[class~=fade]").text();
                                 String name = element1.select("a[href~=/member/]").text();
-                                String reply = element1.select("div.reply_content").text();
+                                String reply = element1.select("div.reply_content").toString();
+                                String replytext = element1.select("div.reply_content").text();
+                                if (reply.contains("img src")) {
+                                    Bitmap replyBitmap;
+                                    int i = reply.indexOf("http:");
+                                    int j = reply.indexOf("\" class");
+                                    String imgurl = reply.substring(i, j);
+                                    replyBitmap = HttpDownLoad.getBitmap(imgurl);
+                                    replyMember.setReplyBitmap(replyBitmap);
+                                    replyMember.setHasbitmap(true);
+                                }
                                 String url = element1.select("img").toString();
                                 String src = subImageurl(url);
                                 if (time.contains("via")) {
@@ -96,10 +107,9 @@ public class ContentActivity extends AppCompatActivity {
                                     time = time.substring(0, k);
                                 }
                                 Bitmap bitmap = HttpDownLoad.getBitmap("http://" + src);
-                                ReplyMember replyMember = new ReplyMember();
                                 replyMember.setBitmap(bitmap);
                                 replyMember.setName(name);
-                                replyMember.setReply(reply);
+                                replyMember.setReply(replytext);
                                 replyMember.setTime(time);
                                 members.add(replyMember);
                             }
@@ -157,7 +167,6 @@ public class ContentActivity extends AppCompatActivity {
             super.onPreExecute();
             dialog.show();
         }
-
         @Override
         protected String doInBackground(String... params) {
             String title = new String();
@@ -184,9 +193,21 @@ public class ContentActivity extends AppCompatActivity {
                 int m = 0;
                 for (; m < 20 && m < length; m++) {
                     Element element1 = element2.get(m);
+                    ReplyMember replyMember = new ReplyMember();
+//                    Element element1 = element2.get(m);
                     String time = element1.select("span[class~=fade]").text();
                     String name = element1.select("a[href~=/member/]").text();
-                    String reply = element1.select("div.reply_content").text();
+                    String reply = element1.select("div.reply_content").toString();
+                    String replytext =  element1.select("div.reply_content").text();
+                    if (reply.contains("img")) {
+                        Bitmap replyBitmap;
+                        int o = reply.indexOf("http:");
+                        int p = reply.indexOf("\" class");
+                        String imgurl = reply.substring(o, p - 1);
+                        replyBitmap = HttpDownLoad.getBitmap(imgurl);
+                        replyMember.setReplyBitmap(replyBitmap);
+                        replyMember.setHasbitmap(true);
+                    }
                     String url = element1.select("img").toString();
                     String src = subImageurl(url);
                     if (time.contains("via")) {
@@ -194,10 +215,9 @@ public class ContentActivity extends AppCompatActivity {
                         time = time.substring(0, k);
                     }
                     Bitmap bitmap = HttpDownLoad.getBitmap("http://" + src);
-                    ReplyMember replyMember = new ReplyMember();
                     replyMember.setBitmap(bitmap);
                     replyMember.setName(name);
-                    replyMember.setReply(reply);
+                    replyMember.setReply(replytext);
                     replyMember.setTime(time);
                     members.add(replyMember);
                 }

@@ -1,4 +1,4 @@
-package com.example.victor.v2ex;
+package com.example.victor.v2ex.Image;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,7 +17,6 @@ public class HttpDownLoad {
         Bitmap bitmap = null;
         try {
             url = new URL(urlString);
-
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setDoInput(true);
             httpURLConnection.connect();

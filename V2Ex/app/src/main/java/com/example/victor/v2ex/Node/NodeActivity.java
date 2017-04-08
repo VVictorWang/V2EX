@@ -16,7 +16,7 @@ import android.util.Log;
 import com.example.victor.v2ex.Containers.Member;
 import com.example.victor.v2ex.Containers.Node;
 import com.example.victor.v2ex.Containers.Theme;
-import com.example.victor.v2ex.HttpDownLoad;
+import com.example.victor.v2ex.Image.HttpDownLoad;
 import com.example.victor.v2ex.R;
 import com.example.victor.v2ex.ScrollClass;
 
@@ -75,7 +75,7 @@ public class NodeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnScrollListener(new ScrollClass(layoutManager) {
             @Override
-            public void onLoad(int currentpage) {
+            public void onLoad(final int currentpage) {
                 viewAdapter.showiiLoading();
                 new Thread(new Runnable() {
                     @Override
@@ -112,6 +112,7 @@ public class NodeActivity extends AppCompatActivity {
                                 theme.setNode(node);
                                 themes.add(theme);
                             }
+                            current = k;
                             handler.sendEmptyMessage(0x123);
 
                         } else {

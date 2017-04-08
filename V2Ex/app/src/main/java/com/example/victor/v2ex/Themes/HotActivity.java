@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.victor.v2ex.Containers.Member;
 import com.example.victor.v2ex.Containers.Theme;
-import com.example.victor.v2ex.HttpDownLoad;
+import com.example.victor.v2ex.Image.HttpDownLoad;
 import com.example.victor.v2ex.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
