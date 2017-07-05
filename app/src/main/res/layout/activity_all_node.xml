@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.victor.v2ex.Node.AllNodeActivity">
+    tools:context="com.example.victor.v2ex.activity.AllNodeActivity">
 
 
     <android.support.v7.widget.RecyclerView

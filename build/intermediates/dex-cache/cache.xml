@@ -3,21 +3,174 @@
 
     <item
         is-multidex="true"
-        jar="/home/victor/xiaoyu/V2EX/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="/home/victor/.android/build-cache/8351ac868210fb638ef99dc50feac14fbc2f52e3/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_91d3e305672c399bfdd6d256648d1e008d6ad5aa/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/c91aedb08b0a8ed7dac2c03ae2126d3e10e9d855/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_99700e6055a982c97100a5379f5219e9be97573b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/fec746a1949b021f0ed90588de6f0ab6effe2a98/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e854b8a4ac7d8aec6898438c5641d614e8d80706/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/80352f604566273965bc5e8515ac97f3c0812ba9/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_804bc0bef7013481bcbc773be63f77c459aee9e6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/876c4862164dc2c9a021a46c1760ca657dfbc80e/output/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_43ef7faade7f8a59cacf6b15d653384752e5d942/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/15c6b7da465864a1e4822631b9b2287185759bc7/output/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_9e5cb8a25d150ca1239ea07362dadcc5a4df6f43/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/80352f604566273965bc5e8515ac97f3c0812ba9/output/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_c24e5c258a091a78d83f3a37ca75f5d57c4b93b6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/cde5e68780f3aa43af3606503e981a54f52352b7/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0f25a35ffb9da69e5f765404526f32f3478b3b8b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/876c4862164dc2c9a021a46c1760ca657dfbc80e/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4b0161bbbadd45aa936a79235d61e01749931bec/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/62b905df427747c4c936c42ce560f9d228d616ab/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_13790260966fcf30c98ce2e9484d9abca83a6126/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/AndroidProject/V2EX/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/home/victor/xiaoyu/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_7c7dc18ce082822ee4094cbbfb0115b7d60f5fff/classes.dex" />
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_1874174d6469aace358522930d30814ce906b682/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/victor/xiaoyu/V2EX/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jar="/home/victor/.android/build-cache/31428a4669c5349fe8ea82c43dfe53b8391b0f0d/output/jars/libs/internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="21f11acae6c3c175bf1ef3813ea6280a9134f06c">
-        <dex dex="/home/victor/xiaoyu/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_ba20ee6bfdf6abc943b32aece4dcef061998b7d2/classes.dex" />
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_7674d2ac3e4db31cba1d989b15616ebbe76139f5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/cde5e68780f3aa43af3606503e981a54f52352b7/output/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_064c29025b67211220dad41d2fdc4a90df5470e8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/c78d274f4f5002449c9368418086cbb9c23e8525/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a0d2a8d60769f301b46593dfff442b5f16730cdb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/AndroidProject/V2EX/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6ca8ec022e3b5ac33b5ad86e3dd2447f2e02a8c4">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_026ecd078e17a70c37a6b104a14da15ad00ec767/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/f86ab717e115b8ced5e4419be12691114a6944af/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c5e6490573cd2cc8018417f60ddd251138b6ed61">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_87beb0fc5db14948ee91d866bfc00c105ece74b7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/15c6b7da465864a1e4822631b9b2287185759bc7/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_efab3a54fed3f25b4af2097f32f12e02bc802637/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/31428a4669c5349fe8ea82c43dfe53b8391b0f0d/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4c9a4d67f3d87afcae9a07c0db2a738c97fd88b0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/.android/build-cache/61fb1587b5f6108c24c27b0688480ad93c6eece3/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="/home/victor/AndroidProject/V2EX/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5a62f7c9b9dadff4a734c10eef307796781e4a1c/classes.dex" />
     </item>
 
 </items>

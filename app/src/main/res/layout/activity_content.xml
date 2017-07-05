@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.example.victor.v2ex.Reply.ContentActivity">
+    tools:context="com.example.victor.v2ex.activity.ContentActivity">
 
 
     <android.support.v7.widget.Toolbar

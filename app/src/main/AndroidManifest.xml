@@ -10,22 +10,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Themes.HotActivity" />
-        <activity android:name=".Themes.Neweset" />
+        <activity android:name=".activity.HotActivity" />
+        <activity android:name=".activity.NewesetActivity" />
         <activity
-            android:name=".Reply.ContentActivity"
-            android:parentActivityName=".Themes.HotActivity" />
-        <activity android:name=".Node.NodeActivity" />
-        <activity android:name=".TabActivity">
+            android:name=".activity.ContentActivity"
+            android:parentActivityName=".activity.HotActivity" />
+        <activity android:name=".activity.NodeActivity" />
+        <activity android:name=".activity.TabActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Node.AllNodeActivity" />
-        <activity android:name=".Member.MemberActivity" />
-        <activity android:name=".Image.BigPhoto"></activity>
+        <activity android:name=".activity.AllNodeActivity" />
+        <activity android:name=".activity.MemberActivity" />
+        <activity android:name=".activity.BigPhotoActivity"></activity>
     </application>
 
 </manifest>
